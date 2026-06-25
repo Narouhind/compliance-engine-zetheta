@@ -1,30 +1,45 @@
-# compliance-engine-zetheta
-# compliance-engine-zetheta
 # Compliance Rule Engine - ZeTheta Project
 
-## Description
-This project is an automated compliance monitoring system designed to analyze financial transactions against Anti-Money Laundering (AML) rules. It generates an immutable, timestamped audit trail for regulatory compliance.
+## 1. Project Overview
+ZeTheta is an automated Regulatory Technology (RegTech) solution designed to monitor financial transactions against global Anti-Money Laundering (AML) standards. It ensures high-integrity traceability and provides an immutable audit trail for regulatory compliance.
 
-## Project Structure
-- `src/main.py`: Main orchestration script.
-- `src/engine.py`: Compliance logic engine containing AML rules.
-- `src/config.json`: Configuration file for system thresholds (AML-01, AML-02).
-- `.gitignore`: Security configuration to protect sensitive audit logs and local environment files.
+## 2. System Architecture
+- **Engine (`src/engine.py`)**: Core logic enabling multi-framework analysis (EU vs USA standards) with Role-Based Access Control (RBAC) and Fuzzy Matching (via rapidfuzz) for KYC risk detection.
+- **Audit Trail (`audit_log.jsonl`)**: Cryptographically secured logs (SHA-256) ensuring compliance decision immutability.
+- **Graph Manager (`graph_manager.py`)**: Integration with `Neo4j` for relationship-based fraud detection.
+- **Dashboard (`dashboard.py`)**: Interactive interface (Streamlit) for real-time monitoring and filtering.
+## 3. Key Features
+| Feature | Description |
+| :--- | :--- |
+| **Multi-Framework Analysis** | Dynamic support for EU/USA standards with adjustable thresholds. |
+| **Immutable Audit Trail** | Cryptographic hash chaining (SHA-256) for audit integrity. |
+| **Fuzzy Matching KYC** | Intelligent name-matching for watchlist screening. |
+| **Neo4j Graph Integration** |Persistent relationship storage for deep-link fraud analysis. |
+| **RBAC Security** |Role-Based Access Control to restrict sensitive compliance functions. |
+| **Real-time Monitoring** | Streamlit-based dashboard for instant alert visualization. |
 
-## Prerequisites
-- Python 3.14 or higher.
-- No external heavy dependencies are required; the system uses standard libraries (`os`, `json`, `datetime`).
+## 4.Security & Compliance Design
+- **Multi-Framework**: Dynamic support for EU AML (10k€) and USA PATRIOT Act (15k€) standards.
 
-## Usage
-1. Ensure the configuration file `src/config.json` is present.
+- **Cryptographic Integrity**: By chaining hashes (prev_hash), any unauthorized modification in the audit_log.jsonl is immediately detectable.
 
-ZeTheta RegTech Engine - Compliance ProjectThe ZeTheta engine is a software solution designed to automate regulatory 
-compliance monitoring (RegTech) and ensure the traceability of financial transactions.  System ArchitectureEngine (engine.py): Core logic enabling multi-framework analysis of transactions.  Audit Trail (audit_log.jsonl): Immutable log recording every compliance audit decision.  Dashboard (dashboard.py): Interactive user interface developed with Streamlit for visualizing and filtering compliance alerts.  Key FeaturesFeatureDescriptionMulti-Framework AnalysisDynamic support for EU and USA standards with adjustable thresholds.  TraceabilityAutomatic logging of all compliance decisions.  Real-time MonitoringInteractive dashboard allowing filtering of suspicious transactions.  User GuideInstall dependencies: pip install streamlit pandas  Run the dashboard: streamlit run dashboard.py  Visualization: Access the results in your browser at the local address indicated in the terminal.  Compliance Test Results Summary (from ZeTheta_Compliance_Report.pdf)  EU_AML (12k€): FLAGGED – Exceeds EU threshold.  USA_AML (12k€): PASSED – Compliant with USA standards.  Conclusion: The ZeTheta system has proven its ability to manage divergent regulations dynamically, ensuring precise compliance according to the jurisdiction. 
-2. Run the system from the project root:
-```bash
-   python src/main.py
-## Documentation
-You can find the detailed technical design document for this project here:
-[Technical Design Document](docs/Regulatory_Compliance_Engine_Technical_Report.pdf)
+- **Access Control**: Python decorators are used to protect critical analytical methods, ensuring only authorized roles (COMPLIANCE_OFFICER) can execute them.
+## 5. Compliance Results (Performance Summary)
+Based on the ZeTheta Compliance Report:
+- **EU_AML (12k€)**: **FLAGGED** – Exceeds threshold.
+- **USA_AML (12k€)**: **PASSED** – Compliant with USA PATRIOT Act.
+- **Conclusion**: The engine effectively manages divergent regulatory requirements in a single execution pipeline.
 
+## 6. Getting Started
+### Prerequisites
+- Python 3.14+
+- `pip install streamlit pandas rapidfuzz neo4j`
+- `pip install -r requirements.txt`
 
+### Execution
+1. Configure thresholds in `src/config.json`.
+2. Run the main engine: `python src/main.py`
+3. Launch the dashboard: `streamlit run dashboard.py`
+
+## 6. Documentation
+- [Technical Design Document](docs/Regulatory_Compliance_Engine_Technical_Report.pdf)
