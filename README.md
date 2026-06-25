@@ -24,6 +24,16 @@ ZeTheta is an automated Regulatory Technology (RegTech) solution designed to mon
 - **Cryptographic Integrity**: By chaining hashes (prev_hash), any unauthorized modification in the audit_log.jsonl is immediately detectable.
 
 - **Access Control**: Python decorators are used to protect critical analytical methods, ensuring only authorized roles (COMPLIANCE_OFFICER) can execute them.
+
+  ## Configuration
+Before running the engine, create a `.env` file at the root of the project with your Neo4j Aura credentials:
+
+```bash
+NEO4J_URI=your_uri_here
+NEO4J_USERNAME=your_username
+NEO4J_PASSWORD=your_password
+NEO4J_DATABASE=neo4j
+
 ## 5. Compliance Results (Performance Summary)
 Based on the ZeTheta Compliance Report:
 - **EU_AML (12k€)**: **FLAGGED** – Exceeds threshold.
